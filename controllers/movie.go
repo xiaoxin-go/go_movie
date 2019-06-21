@@ -6,7 +6,6 @@ import (
 	"github.com/astaxie/beego/orm"
 	"goprj1/models"
 	_ "github.com/go-sql-driver/mysql"
-	"strconv"
 )
 
 func init(){
@@ -22,19 +21,15 @@ func (this *MovieController) Get(){
 	performer := this.GetString("performer")
 	genre := this.GetString("genre")
 	series := this.GetString("series")
-	page := this.GetString("page")
-	page_size := this.GetString("page_size")
-
-	page_int, err := strconv.Atoi(page)
+	page, err := this.GetInt("page", 1)
 	if err != nil{
-		fmt.Println("TypeError: page not is int: ", page, page_int)
+		fmt.Println("TypeError: page not is int: ", page)
 		this.Ctx.WriteString("TypeError: page not is int")
 		return
 	}
-
-	page_size_int, err := strconv.Atoi(page_size)
+	page_size, err := this.GetInt("page_size", 50)
 	if err != nil{
-		fmt.Println("TypeError: page_size not is int: ", page_size, page_size_int)
+		fmt.Println("TypeError: page_size not is int: ", page_size)
 		this.Ctx.WriteString("TypeError: page not is int")
 		return
 	}
@@ -55,18 +50,26 @@ func (this *MovieController) Get(){
 			this.Ctx.WriteString("获取行数异常：")
 			return
 		}
-		_, err = qs.Limit(page, page_int*page_size_int).All(&movies)
+		_, err = qs.Limit(page, page*page_size).All(&movies)
 		if err != nil{
 			fmt.Println("获取数据异常：", err, count)
 			this.Ctx.WriteString("获取数据异常：")
 			return
 		}
 	}
-
-	this.Ctx.WriteString("this is get")
+	this.Data["json"] = &movies
+	this.ServeJSON()
 }
 
 func (this *MovieController) Delete(){
 	fmt.Println("this is delete")
-	this.Ctx.WriteString("this is delete")
+	id, err := this.GetInt("id")
+	if err != nil{
+		beego.Info("Params Error: Id get error!", err, id)
+		this.ServeJSON()
+	}
+	
+	mystruct := models.User{Id:id}
+	this.Data["json"] = &mystruct
+	this.ServeJSON()
 }
