@@ -2,13 +2,13 @@ package libs
 
 type HttpResponse struct{
 	Code int `json:"code"`
-	Data interface{} `json:"data"`
+	HttpData interface{} `json:"data"`
 	Message string `json:"message"`
 }
 
 func (this *HttpResponse) Success(data interface{}, message string)*HttpResponse{
 	this.Code = 200
-	this.Data = data
+	this.HttpData = data
 	this.Message = message
 	return this
 }

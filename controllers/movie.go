@@ -2,18 +2,24 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	"goprj1/models"
 	_ "github.com/go-sql-driver/mysql"
+	"goprj1/libs"
+	"goprj1/models"
 )
 
+var O orm.Ormer
+
 func init(){
+	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", "root:xiaoxin@tcp(127.0.0.1:3306)/movie?charset=utf8", 30)
+	orm.RegisterModel(new(models.Movie))
+	O = orm.NewOrm()
+	O.Using("default")
 }
 
 type MovieController struct{
-	beego.Controller
+	libs.MyBeego
 }
 
 func (this *MovieController) Get(){
@@ -22,54 +28,50 @@ func (this *MovieController) Get(){
 	genre := this.GetString("genre")
 	series := this.GetString("series")
 	page, err := this.GetInt("page", 1)
-	if err != nil{
-		fmt.Println("TypeError: page not is int: ", page)
-		this.Ctx.WriteString("TypeError: page not is int")
-		return
-	}
+	this.HttpParamsError(err, "page不能是字符")
 	page_size, err := this.GetInt("page_size", 50)
-	if err != nil{
-		fmt.Println("TypeError: page_size not is int: ", page_size)
-		this.Ctx.WriteString("TypeError: page not is int")
-		return
-	}
-
-	fmt.Println(keyword, performer, genre, series, page, page_size)
-	orm.RegisterDataBase("default", "mysql", "root:xiaoxin@tcp(127.0.0.1:3306)/movie?charset=utf8", 30)
+	this.HttpParamsError(err, "page_size不能是字符")
+	fmt.Printf("keyword:%s,performer:%s,genre:%s,series:%s,page:%s,page_size:%s,",
+		keyword, performer, genre, series, page, page_size)
 
 	var movies []*models.Movie
-	o := orm.NewOrm()
-	qs := o.QueryTable("movie")
-	if keyword != ""{
+
+	qs := O.QueryTable("movie")
+	var count int64
+	switch{
+	case keyword != "":
 		cond := orm.NewCondition()
 		cond1 := cond.And("title__contains", keyword).Or("info__contains", keyword)
-		qs := qs.SetCond(cond1)
-		count, err := qs.Count()
-		if err != nil{
-			fmt.Println("获取行数异常：", err, count)
-			this.Ctx.WriteString("获取行数异常：")
-			return
-		}
-		_, err = qs.Limit(page, page*page_size).All(&movies)
-		if err != nil{
-			fmt.Println("获取数据异常：", err, count)
-			this.Ctx.WriteString("获取数据异常：")
-			return
-		}
+		qs = qs.SetCond(cond1)
+	case performer != "":
+		qs = qs.Filter("performer__contains", performer)
+	case series != "":
+		qs = qs.Filter("series", series)
+	case genre != "":
+		qs = qs.Filter("genre", genre)
 	}
-	this.Data["json"] = &movies
-	this.ServeJSON()
+	count, err = qs.Count()
+	fmt.Println(count)
+	this.HttpServerError(err, "获取行数异常")
+	_, err = qs.Limit(page*page_size, (page-1)*page_size).All(&movies)
+	this.HttpServerError(err, "获取数据异常")
+
+	result_data :=  make(map[string]interface{})
+	result_data["data_list"] = movies
+	result_data["total"] = count
+	this.HttpSuccess(result_data, "数据请求成功")
 }
 
 func (this *MovieController) Delete(){
 	fmt.Println("this is delete")
 	id, err := this.GetInt("id")
-	if err != nil{
-		beego.Info("Params Error: Id get error!", err, id)
-		this.ServeJSON()
-	}
-	
-	mystruct := models.User{Id:id}
-	this.Data["json"] = &mystruct
-	this.ServeJSON()
+	this.HttpParamsError(err, "Params Error: Id get error!")
+	movie := models.Movie{Id: id}
+	num, err := O.Delete(&movie)
+	qs := O.QueryTable("movie")
+	num, err = qs.Filter("id__gt", 7).Delete()
+	fmt.Println(num)
+	this.HttpServerError(err, "删除异常")
+	fmt.Println(movie)
+	this.HttpSuccess(num, "删除成功")
 }

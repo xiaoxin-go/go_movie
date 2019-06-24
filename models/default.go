@@ -42,27 +42,17 @@ type Movie struct{
 	Logo string `orm:"column(logo)"json:"logo"`
 	Genre string `orm:"column(genre)"json:"genre"`
 	Series string `orm:"column(series)"json:"series"`
-	Vender string `orm:"column(vender)"json:"vender"`
 	Director string `orm:"column(director)"json:"director"`
-	Studio string `orm:"column(studio)"json:"studio"`
-	Star int `orm:"column(str)"json:"star"`
-	PlayNum int `orm:"column(playnum)"json:"playnum"`
-	CommentNum int `orm:"column(commentnum)"json:"commentnum"`
-	TagId int `orm:"column(tag_id)"json:"tag_id"`
-	Area string `orm:"column(area)"json:"area"`
-	ReleaseTime time.Time `orm:"column(release_time);type(datetime)"json:"release_json"`
+	ReleaseTime string `orm:"column(release_time)"json:"release_json"`
 	Length string `orm:"column(length)"json:"length"`
-	Addtime time.Time `orm:"auto_now;column(addtime);type(datetime)"json:"addtime"`
 	Performer string `orm:"column(performer)"json:"performer"`
-	State int `orm:"column(state)"json:"state"`
 	Video string `orm:"column(video)"json:"video"`
-	IdDelete int `orm:"column(is_delete)"json:"is_delete"`
 }
 
 type Performer struct{
 	Id int `orm:"column(id);auto"json:"id"`
 	Name string `orm:"column(name)"json:"name"`
-	Age int `orm:"column(age)"json:"age"`
+	Age string `orm:"column(age)"json:"age"`
 	Birthday time.Time `orm:"column(birthday);type(datetime)"json:"birthday"`
 	Height string `orm:"column(height)"json:"height"`
 	Cup string `orm:"column(cup)"json:"cup"`
@@ -71,22 +61,22 @@ type Performer struct{
 	Hips string `orm:"column(hips)"json:"hips"`
 	Hometown string `orm:"column(hometown)"json:"hometown"`
 	Hobby string `orm:"column(hobby)"json:"hobby"`
-	IdDelete int `orm:"column(is_delete)"json:"is_delete"`
-	Image string `orm:"column(image)"json:"image"`
+	Logo string `orm:"column(title)"json:"logo"`
 }
 
 type Link struct{
 	Id int `orm:"column(id);auto"json:"id"`
 	Name string `orm:"column(name)"json:"name"`
 	Url string `orm:"column(url)"json:"url"`
-	MovieId int `orm:"column(movie_id)"json:"movie_id"`
+	Title int `orm:"column(title)"json:"title"`
+	ShareTime string `orm:"column(share_time)"json:"share_time"`
 }
 
 type Image struct{
 	Id int `orm:"column(id);auto"json:"id"`
 	Name string `orm:"column(name)"json:"name"`
 	Url string `orm:"column(url)"json:"url"`
-	MovieId int `orm:"column(movie_id)"json:"movie_id"`
+	Title int `orm:"column(title)"json:"title"`
 }
 
 type Preview struct{
@@ -99,21 +89,21 @@ type Preview struct{
 type Comment struct{
 	Id int `orm:"column(id);auto"json:"id"`
 	Content string `orm:"column(content)"json:"content"`
-	MovieId int `orm:"column(movie_id)"json:"movie_id"`
+	Title int `orm:"column(title)"json:"title"`
 	UserId int `orm:"column(user_id)"json:"user_id"`
 	Addtime time.Time `orm:"auto_now;column(addtime);type(datetime)"json:"addtime"`
 }
 
 type MovieCol struct{
 	Id int `orm:"column(id);auto"json:"id"`
-	MovieId int `orm:"column(movie_id)"json:"movie_id"`
+	Title int `orm:"column(title)"json:"title"`
 	UserId int `orm:"column(user_id)"json:"user_id"`
 	Addtime time.Time `orm:"auto_now;column(addtime);type(datetime)"json:"addtime"`
 }
 
 type Follow struct{
 	Id int `orm:"column(id);auto"json:"id"`
-	PerformerId int `orm:"column(performer_id)"json:"performer_id"`
+	Performer int `orm:"column(performer)"json:"performer"`
 	UserId int `orm:"column(user_id)"json:"user_id"`
 	Addtime time.Time `orm:"auto_now;column(addtime);type(datetime)"json:"addtime"`
 }
