@@ -53,7 +53,7 @@ type Performer struct{
 	Id int `orm:"column(id);auto"json:"id"`
 	Name string `orm:"column(name)"json:"name"`
 	Age string `orm:"column(age)"json:"age"`
-	Birthday time.Time `orm:"column(birthday);type(datetime)"json:"birthday"`
+	Birthday string `orm:"column(birthday)"json:"birthday"`
 	Height string `orm:"column(height)"json:"height"`
 	Cup string `orm:"column(cup)"json:"cup"`
 	Bust string `orm:"column(bust)"json:"bust"`
@@ -61,14 +61,14 @@ type Performer struct{
 	Hips string `orm:"column(hips)"json:"hips"`
 	Hometown string `orm:"column(hometown)"json:"hometown"`
 	Hobby string `orm:"column(hobby)"json:"hobby"`
-	Logo string `orm:"column(title)"json:"logo"`
+	Logo string `orm:"column(logo)"json:"logo"`
 }
 
 type Link struct{
 	Id int `orm:"column(id);auto"json:"id"`
 	Name string `orm:"column(name)"json:"name"`
 	Url string `orm:"column(url)"json:"url"`
-	Title int `orm:"column(title)"json:"title"`
+	Title string `orm:"column(title)"json:"title"`
 	ShareTime string `orm:"column(share_time)"json:"share_time"`
 }
 
@@ -76,7 +76,7 @@ type Image struct{
 	Id int `orm:"column(id);auto"json:"id"`
 	Name string `orm:"column(name)"json:"name"`
 	Url string `orm:"column(url)"json:"url"`
-	Title int `orm:"column(title)"json:"title"`
+	Title string `orm:"column(title)"json:"title"`
 }
 
 type Preview struct{

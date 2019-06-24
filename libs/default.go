@@ -24,3 +24,11 @@ func (this *HttpResponse) ParamsError(message string)*HttpResponse{
 	this.Message = message
 	return this
 }
+
+type MyError struct{
+	Message string
+}
+
+func (this *MyError) Error()string{
+	return this.Message
+}

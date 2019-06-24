@@ -8,16 +8,6 @@ import (
 	"goprj1/models"
 )
 
-var O orm.Ormer
-
-func init(){
-	orm.RegisterDriver("mysql", orm.DRMySQL)
-	orm.RegisterDataBase("default", "mysql", "root:xiaoxin@tcp(127.0.0.1:3306)/movie?charset=utf8", 30)
-	orm.RegisterModel(new(models.Movie))
-	O = orm.NewOrm()
-	O.Using("default")
-}
-
 type MovieController struct{
 	libs.MyBeego
 }

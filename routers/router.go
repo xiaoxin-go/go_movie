@@ -6,9 +6,8 @@ import (
 )
 
 func init() {
-    beego.Router("/", &controllers.MainController{})
-    beego.Router("/mysql", &controllers.MysqlController{})
-    beego.Router("/orm", &controllers.OrmController{})
-    beego.Router("/test", &controllers.TestController{})
     beego.Router("/movie", &controllers.MovieController{})
+    beego.Router("/performer", &controllers.PerformerController{})
+    beego.Router("/movie/detail", &controllers.MovieDetailController{})
+    beego.Router("/performer/detail", &controllers.PerformerDetailController{})
 }
