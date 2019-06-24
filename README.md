@@ -88,3 +88,100 @@
 		},
 		message: 返回消息
 	}
+	
+注册：register     => /register    =>  register.RegisterHandler
+    请求： post
+    参数： {
+        username: "",
+        password: "",
+        nickname: ""
+    }
+    返回：{
+        code: 状态值， {200: 成功，500: 异常，403: 权限异常},
+        message: 返回消息
+    }
+
+登录：login        => /login       => login.LoginHandler
+    请求： post
+    参数： {
+        username: "",
+        password: "",
+    }
+    返回：{
+        code: 状态值， {200: 成功，500: 异常，403: 权限异常},
+        message: 返回消息
+    }
+    
+收藏：
+查看收藏： getMoviecol   => /moviecol    => moviecol.MoviecolHandler
+    请求： get
+    参数： {
+        user_id: 用户ID, 默认为空
+        page: 1
+        page_size: 20
+    } 
+    返回：{
+        code: 状态值， {200: 成功，500: 异常，403: 权限异常},
+        data: {
+            movies: [], // 演员电影信息
+            total:0
+        },
+        message: 返回消息
+    }
+添加收藏： addMoviecol   => /moviecol    => moviecol.MoviecolHandler
+    请求： post
+    参数： {
+        user_id: 用户ID,
+        title: 电影标题
+    }
+    返回：{
+        code: 状态值， {200: 成功，500: 异常，403: 权限异常},
+        message: 返回消息
+    }
+删除收藏： deleteMoviecol   => /moviecol    => moviecol.MoviecolHandler
+    请求： delete
+    参数： {
+        user_id: 用户ID,
+        title: 电影标题
+    }
+    返回：{
+        code: 状态值， {200: 成功，500: 异常，403: 权限异常},
+        message: 返回消息
+    }
+
+关注： 
+查看关注： getFollow   => /follow      => follow.FollowHandler
+    请求： get
+    参数： {
+        user_id: 用户ID, 默认为空
+        page: 1
+        page_size: 20
+    } 
+    返回：{
+        code: 状态值， {200: 成功，500: 异常，403: 权限异常},
+        data: {
+            performer: [], // 演员电影信息
+            total:0
+        },
+        message: 返回消息
+    }
+添加关注： addFollow   => /follow    => moviecol.FollowHandler
+    请求： post
+    参数： {
+        user_id: 用户ID,
+        performer: 演员名称
+    }
+    返回：{
+        code: 状态值， {200: 成功，500: 异常，403: 权限异常},
+        message: 返回消息
+    }
+删除关注： deleteFollow   => /follow    => moviecol.FollowHandler
+    请求： delete
+    参数： {
+        user_id: 用户ID,
+        performer: 演员名称
+    }
+    返回：{
+        code: 状态值， {200: 成功，500: 异常，403: 权限异常},
+        message: 返回消息
+    }
