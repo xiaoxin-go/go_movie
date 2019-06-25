@@ -279,13 +279,32 @@ func (this *GetMovie) getImage(htmltext string)([]Image, error){
 	return images, nil
 }
 
-func SaveMovie(){
+type Mysql struct{
+	Db sql.DB
+}
+
+func (this *Mysql)Init()error{
+	db, err := sql.Open("mysql", "root:xiaoxin@tcp(127.0.0.1:3306)/video?charset=utf8")
+	if err != nil{
+		return err
+	}
+	err = db.Ping()
+	if err != nil{
+		return err
+	}
+	this.Db = *db
+	return nil
+}
+func(this *Mysql) SaveMovie(){
+	stmt, err := this.Db.Prepare("insert into")
+}
+func (this *Mysql) SavePerformer(){
 
 }
-func SavePerformer(){
+func (this *Mysql) SaveLink(){
 
 }
-func SaveLink(){
+func (this *Mysql) SaveImage(){
 
 }
 
