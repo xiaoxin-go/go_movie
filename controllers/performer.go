@@ -12,20 +12,16 @@ type PerformerController struct{
 }
 
 func (this *PerformerController) Get(){
-	page, err := this.GetInt("page", 1)
-	this.HttpParamsError(err, "page不能是字符")
-	page_size, err := this.GetInt("page_size", 50)
-	this.HttpParamsError(err, "page_size不能是字符")
-	fmt.Printf("page:%s,page_size:%s,", page, page_size)
+	this.GetPage()
 
 	var Performers []*models.Performer
 
 	qs := O.QueryTable("performer")
 	var count int64
-	count, err = qs.Count()
+	count, err := qs.Count()
 	fmt.Println("count:",count)
 	this.HttpServerError(err, "获取行数异常")
-	_, err = qs.Limit(page*page_size, (page-1)*page_size).All(&Performers)
+	_, err = qs.Limit(this.Page*this.PageSize, (this.Page-1)*this.PageSize).All(&Performers)
 	this.HttpServerError(err, "获取数据异常")
 
 	result_data :=  make(map[string]interface{})

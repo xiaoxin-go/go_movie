@@ -14,6 +14,9 @@ func init(){
 	orm.RegisterModel(new(models.Performer))
 	orm.RegisterModel(new(models.Link))
 	orm.RegisterModel(new(models.Image))
+	orm.RegisterModel(new(models.User))
+	orm.RegisterModel(new(models.MovieCol))
+	orm.RegisterModel(new(models.Follow))
 	O = orm.NewOrm()
 	O.Using("default")
 }

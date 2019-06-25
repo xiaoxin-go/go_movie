@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"goprj1/libs"
 	"goprj1/models"
 )
@@ -13,11 +12,7 @@ type PerformerDetailController struct{
 func (this *PerformerDetailController) Get(){
 	id, err := this.GetInt("id")
 	this.HttpParamsError(err, "id is must int")
-	page, err := this.GetInt("page", 1)
-	this.HttpParamsError(err, "page不能是字符")
-	page_size, err := this.GetInt("page_size", 50)
-	this.HttpParamsError(err, "page_size不能是字符")
-	fmt.Printf("id:%s \n", id, page, page_size)
+	this.GetPage()
 
 	// 获取演员信息
 	performer := models.Performer{Id: id}
@@ -30,7 +25,7 @@ func (this *PerformerDetailController) Get(){
 	qs = qs.Filter("performer__contains", performer.Name)
 	total, err := qs.Count()
 	this.HttpServerError(err, "获取电影条数异常")
-	_, err = qs.Limit(page*page_size, (page-1)*page_size).All(&movies)
+	_, err = qs.Limit(this.Page*this.PageSize, (this.Page-1)*this.PageSize).All(&movies)
 	this.HttpServerError(err, "获取演员电影异常")
 
 	result_data :=  make(map[string]interface{})

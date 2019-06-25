@@ -17,12 +17,7 @@ func (this *MovieController) Get(){
 	performer := this.GetString("performer")
 	genre := this.GetString("genre")
 	series := this.GetString("series")
-	page, err := this.GetInt("page", 1)
-	this.HttpParamsError(err, "page不能是字符")
-	page_size, err := this.GetInt("page_size", 50)
-	this.HttpParamsError(err, "page_size不能是字符")
-	fmt.Printf("keyword:%s,performer:%s,genre:%s,series:%s,page:%s,page_size:%s,",
-		keyword, performer, genre, series, page, page_size)
+	this.GetPage()
 
 	var movies []*models.Movie
 
@@ -40,10 +35,10 @@ func (this *MovieController) Get(){
 	case genre != "":
 		qs = qs.Filter("genre", genre)
 	}
-	count, err = qs.Count()
+	count, err := qs.Count()
 	fmt.Println(count)
 	this.HttpServerError(err, "获取行数异常")
-	_, err = qs.Limit(page*page_size, (page-1)*page_size).All(&movies)
+	_, err = qs.Limit(this.Page*this.PageSize, (this.Page-1)*this.PageSize).All(&movies)
 	this.HttpServerError(err, "获取数据异常")
 
 	result_data :=  make(map[string]interface{})

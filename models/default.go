@@ -1,24 +1,16 @@
 package models
 
 import (
-	"github.com/astaxie/beego/orm"
 	"time"
 )
 
-func init(){
-	orm.RegisterDataBase("default", "mysql", "root:xiaoxin@tcp(127.0.0.1:3306)/movie?charset=utf8", 30)
-}
-
 type User struct {
 	Id int `orm:"column(id);auto"json:"id"`
-	Name string `orm:"column(name)"json:"name"`
-	Pwd string `orm:"column(pwd)"json:"pwd"`
-	Email string `orm:"column(email)"json:"email"`
-	Phone string `orm:"column(phone)"json:"phone"`
-	Info string `orm:"column(info)"json:"info"`
+	Username string `orm:"column(username)"json:"username"`
+	Password string `orm:"column(password)"json:"password"`
+	Nickname string `orm:"column(nickname)"json:"nickname"`
 	Face string `orm:"column(face)"json:"face"`
 	Addtime time.Time `orm:"auto_now;column(addtime);type(datetime)"json:"addtime"`
-	Uuid string `orm:"column(uuid)"json:"uuid"`
 }
 
 type Userlog struct{
@@ -96,14 +88,14 @@ type Comment struct{
 
 type MovieCol struct{
 	Id int `orm:"column(id);auto"json:"id"`
-	Title int `orm:"column(title)"json:"title"`
+	Title string `orm:"column(title)"json:"title"`
 	UserId int `orm:"column(user_id)"json:"user_id"`
 	Addtime time.Time `orm:"auto_now;column(addtime);type(datetime)"json:"addtime"`
 }
 
 type Follow struct{
 	Id int `orm:"column(id);auto"json:"id"`
-	Performer int `orm:"column(performer)"json:"performer"`
+	Performer string `orm:"column(performer)"json:"performer"`
 	UserId int `orm:"column(user_id)"json:"user_id"`
 	Addtime time.Time `orm:"auto_now;column(addtime);type(datetime)"json:"addtime"`
 }

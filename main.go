@@ -1,8 +1,8 @@
 package main
 
 import (
-	_ "goprj1/routers"
 	"github.com/astaxie/beego"
+	_ "goprj1/routers"
 )
 
 func main() {
