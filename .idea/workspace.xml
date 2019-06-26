@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3000dcf8-cb50-407c-bc0b-296ac660b90c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/follow.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/follow.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/moviecol.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/moviecol.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pachong.go" beforeDir="false" afterPath="$PROJECT_DIR$/pachong.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pachong.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="466" column="17" lean-forward="true" selection-start-line="466" selection-start-column="17" selection-end-line="466" selection-end-column="17" />
+            <state relative-caret-position="266">
+              <caret line="488" column="9" lean-forward="true" selection-start-line="488" selection-start-column="9" selection-end-line="488" selection-end-column="9" />
               <folding>
                 <element signature="e#14#64#0" expanded="true" />
                 <element signature="n#!!block;n#getMovieInfo#0" />
@@ -145,11 +141,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-19" />
-    <option name="y" value="32" />
-    <option name="width" value="1920" />
-    <option name="height" value="1040" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -253,15 +249,15 @@
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-15" y="26" width="1536" height="832" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.161705" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16018766" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.16715977" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.16715977" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -269,7 +265,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32988167" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.24408284" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.24193548" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -558,8 +554,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pachong.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="466" column="17" lean-forward="true" selection-start-line="466" selection-start-column="17" selection-end-line="466" selection-end-column="17" />
+        <state relative-caret-position="266">
+          <caret line="488" column="9" lean-forward="true" selection-start-line="488" selection-start-column="9" selection-end-line="488" selection-end-column="9" />
           <folding>
             <element signature="e#14#64#0" expanded="true" />
             <element signature="n#!!block;n#getMovieInfo#0" />
