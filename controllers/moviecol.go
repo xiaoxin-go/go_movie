@@ -75,5 +75,5 @@ func(this *MoviecolController)Delete(){
 	qs := O.QueryTable("moviecol")
 	count, err := qs.Filter("title", title).Filter("user_id", user_id.(int)).Delete()
 	this.HttpServerError(err, "删除收藏异常")
-	this.HttpSuccess(map[string]int{"total": int(count)}, "删除收藏成功")
+	this.HttpSuccess(struct{Total int `json:"total"`}{Total: int(count)}, "删除收藏成功")
 }

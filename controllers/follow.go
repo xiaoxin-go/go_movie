@@ -69,5 +69,5 @@ func(this *FollowController)Delete(){
 	qs := O.QueryTable("follow")
 	count, err := qs.Filter("performer", performer).Filter("user_id", user_id.(int)).Delete()
 	this.HttpServerError(err, "删除关注异常")
-	this.HttpSuccess(map[string]int{"total": int(count)}, "删除关注成功")
+	this.HttpSuccess(struct{Total int `json:"total"`}{Total: int(count)}, "删除关注成功")
 }
