@@ -423,7 +423,7 @@ func main(){
 	ErrorExit(err, "数据库连接异常")
 
 	// 获取演员HTML
-	performer_text, err := getHtml("https://avmoo.asia/cn/actresses")
+	performer_text, err := getHtml("")
 	ErrorExit(err, "获取演员页面异常")
 
 	// 获取演员URL列表
