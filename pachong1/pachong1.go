@@ -93,7 +93,7 @@ func getHtml(url string)(string, error){
 }
 func (this *GetMovie) getPerformerUrls(html_text string)([]string, error){
 	var urls []string
-	urls_ret := regexp.MustCompile(`href="(https://avmoo.asia/cn/star/.*?)"`)
+	urls_ret := regexp.MustCompile(`href="(https:///cn/star/.*?)"`)
 	urls_list := urls_ret.FindAllStringSubmatch(html_text, -1)
 	for _, url_item := range urls_list{
 		urls = append(urls, url_item[1])
@@ -175,7 +175,7 @@ func (this *GetMovie) getMovieUrls(url string)([]string, error){
 		fmt.Println(err)
 		return movie_urls, err
 	}
-	urls_ret := regexp.MustCompile(`<a class="movie-box" href="(https://avmoo.asia/cn/movie/.*?)">`)
+	urls_ret := regexp.MustCompile(`<a class="movie-box" href="(https:///cn/movie/.*?)">`)
 	urls_list := urls_ret.FindAllStringSubmatch(html_text, -1)
 	for _, url_item := range urls_list{
 		movie_urls = append(movie_urls, url_item[1])
@@ -235,35 +235,35 @@ func (this *GetMovie) getMovieInfo(url string)(Movie, error){
 	//fmt.Println(length)
 
 	// 获取导演
-	director_ret := regexp.MustCompile(`导演:</span> <a href="https://avmoo.asia/cn/director/.*?">(.*?)</a></p>`)
+	director_ret := regexp.MustCompile(`导演:</span> <a href="https:///cn/director/.*?">(.*?)</a></p>`)
 	directors := director_ret.FindStringSubmatch(info_text)
 	if len(directors) > 1{
 		movie.Director = directors[1]
 	}
 
 	// 获取制作商
-	producers_ret := regexp.MustCompile(`制作商: </p><p><a href="https://avmoo.asia/cn/studio/.*?">(.*?)</a></p>`)
+	producers_ret := regexp.MustCompile(`制作商: </p><p><a href="https:///cn/studio/.*?">(.*?)</a></p>`)
 	producers := producers_ret.FindStringSubmatch(info_text)
 	if len(producers) > 1{
 		movie.Producers = producers[1]
 	}
 
 	// 获取发行商
-	issuer_ret := regexp.MustCompile(`发行商: </p><p><a href="https://avmoo.asia/cn/label/.*?">(.*?)</a></p>`)
+	issuer_ret := regexp.MustCompile(`发行商: </p><p><a href="https:///cn/label/.*?">(.*?)</a></p>`)
 	issuer := issuer_ret.FindStringSubmatch(info_text)
 	if len(issuer) > 1{
 		movie.Issuer = issuer[1]
 	}
 
 	// 获取系列
-	series_ret := regexp.MustCompile(`系列: </p><p><a href="https://avmoo.asia/cn/series/.*?">(.*?)</a></p>`)
+	series_ret := regexp.MustCompile(`系列: </p><p><a href="https://cn/series/.*?">(.*?)</a></p>`)
 	seriess := series_ret.FindStringSubmatch(info_text)
 	if len(seriess) > 1{
 		movie.Series = seriess[1]
 	}
 
 	// 获取类别
-	genre_ret := regexp.MustCompile(`<a href="https://avmoo.asia/cn/genre/.*?">(.*?)</a>`)
+	genre_ret := regexp.MustCompile(`<a href="https:///cn/genre/.*?">(.*?)</a>`)
 	genres := genre_ret.FindAllStringSubmatch(info_text, -1)
 	genre := ""
 	for _, genre_item := range genres{
@@ -423,7 +423,7 @@ func main(){
 	ErrorExit(err, "数据库连接异常")
 
 	// 获取演员HTML
-	performer_text, err := getHtml("https://avmoo.asia/cn/actresses")
+	performer_text, err := getHtml("https:///cn/actresses")
 	ErrorExit(err, "获取演员页面异常")
 
 	// 获取演员URL列表
