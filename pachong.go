@@ -263,7 +263,7 @@ func (this *GetMovie) getMovieInfo(url string)(Movie, error){
 	}
 
 	// 获取类别
-	genre_ret := regexp.MustCompile(`<a href="https://avmoo.asia/cn/genre/.*?">(.*?)</a>`)
+	genre_ret := regexp.MustCompile(`<a hre="">(.*?)</a>`)
 	genres := genre_ret.FindAllStringSubmatch(info_text, -1)
 	genre := ""
 	for _, genre_item := range genres{
